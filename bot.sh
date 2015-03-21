@@ -45,7 +45,7 @@ tail -f .botfile | openssl s_client -connect $server:6697 | while true; do
 
         # if the message starts with ":laracroft: source" then reply with source info.
         elif `echo "$message" | egrep '^:laracroft: source$' > /dev/null`; then
-            send "PRIVMSG $chan :My source is only available on zerus currently, squ1d is way too lazy to have githubed it, but maybe one day after my source gets cleaned up and commented it will get on github."
+            send "My source is now available at https://github.com/squidboylan/laracroft it is pretty bad though so be careful."
 
         # if the message is ":laracroft: $box is " store the following text in a file with the box's name
         elif `echo "$message" | egrep '^:laracroft: ([a-zA-Z]+[-]*[a-zA-Z]*) is ' > /dev/null`; then
