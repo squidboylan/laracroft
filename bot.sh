@@ -23,7 +23,7 @@ tail -f .botfile | openssl s_client -connect $server:6697 | while true; do
         send "USER laracroft laracroft laracroft :laracroft"
         send "NICK laracroft"
         send "JOIN #squidtest"
-#        send "JOIN #catacombs $key"
+        send "JOIN #catacombs $key"
         started="yes"
     fi
 
@@ -37,7 +37,7 @@ tail -f .botfile | openssl s_client -connect $server:6697 | while true; do
 
     if `echo $irc | grep PRIVMSG > /dev/null`; then
         chan="`echo $irc | cut -d ' ' -f3`"
-        message="`echo $irc|tr -d '\r' | cut -d ' ' -f4-`"
+        message="`echo $irc | tr -d '\r' | cut -d ' ' -f4-`"
 
         # if the message starts with ":laracroft: help" then reply with a help message.
         if `echo "$message" | egrep '^:laracroft: help$' > /dev/null`; then
@@ -45,7 +45,7 @@ tail -f .botfile | openssl s_client -connect $server:6697 | while true; do
 
         # if the message starts with ":laracroft: source" then reply with source info.
         elif `echo "$message" | egrep '^:laracroft: source$' > /dev/null`; then
-            send "My source is now available at https://github.com/squidboylan/laracroft it is pretty bad though so be careful."
+            send "PRIVMSG $chan :My source is now available at https://github.com/squidboylan/laracroft it is pretty bad though so be careful."
 
         # if the message is ":laracroft: $box is " store the following text in a file with the box's name
         elif `echo "$message" | egrep '^:laracroft: ([a-zA-Z]+[-]*[a-zA-Z]*) is ' > /dev/null`; then
