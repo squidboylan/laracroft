@@ -85,12 +85,12 @@ tail -f .botfile | openssl s_client -connect $server:6697 | while true; do
                     name=`host $i | cut -d $'\n' -f2 | cut -d ' ' -f5 | cut -d '.' -f1`
                     ip=`echo $i | cut -d '.' -f4`
                     send "PRIVMSG $chan :$ip $name"
-                    sleep 1
+                    sleep .6
                 # if the IP isn't in DNS report that instead of saying nothing about its name.
                 else
                     ip=`echo $i | cut -d '.' -f4`
                     send "PRIVMSG $chan :$ip (is alive but not in DNS)" 
-                    sleep 1
+                    sleep .6
                 fi
             done
 
@@ -123,11 +123,11 @@ tail -f .botfile | openssl s_client -connect $server:6697 | while true; do
                     name=`host $i | cut -d $'\n' -f2 | cut -d ' ' -f5 | cut -d '.' -f1`
                     ip=`echo "$i" | cut -d '.' -f4`
                     send "PRIVMSG $chan :$ip is not responding but is \"$name\" in DNS"
-                    sleep 1 
+                    sleep .6 
 		        else 
                     ip=`echo "$i" | cut -d '.' -f4`
                     send "PRIVMSG $chan :$ip is not responding and is not in DNS"
-                    sleep 1
+                    sleep .6
                 fi
             done
 
@@ -154,7 +154,7 @@ tail -f .botfile | openssl s_client -connect $server:6697 | while true; do
                     name=`host $i | cut -d $'\n' -f2 | cut -d ' ' -f5 | cut -d '.' -f1`
                     ip=`echo "$i" | cut -d '.' -f4`
                     send "PRIVMSG $chan :$ip, $name is dead"
-                    sleep 1
+                    sleep .6
                 fi
             done
 
@@ -180,7 +180,7 @@ tail -f .botfile | openssl s_client -connect $server:6697 | while true; do
                 echo "boxinfo/$file"
                 response=`cat boxinfo/$box`
                 send "PRIVMSG $chan :$box is $response"
-                sleep 1
+                sleep .6
             else
                 send "PRIVMSG $chan :huh?"
             fi
