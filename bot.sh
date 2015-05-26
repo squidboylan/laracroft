@@ -19,7 +19,7 @@ function has {
 
 # function that takes two args; a channel destination and the message to send
 function say {
-	send "PRIVMSG $1 :$2\r"
+	send "PRIVMSG $1 :$2"
 }
 
 IFS=$'\n'
@@ -46,10 +46,10 @@ tail -f .botfile | openssl s_client -connect $server:6697 | while true; do
     fi
 
     if `echo $irc | grep PRIVMSG > /dev/null`; then
-    	set -- $message # tokenizes each word of $message into the positional params $1, $2, ..., etc.
     	nick="`echo $irc | cut -d '!' -f1`"
         chan="`echo $irc | cut -d ' ' -f3`"
         message="`echo $irc | tr -d '\r' | cut -d ' ' -f4- | cut -c 2-`"
+        set -- $message # tokenizes each word of $message into the positional params $1, $2, ..., etc.
 	
 	# if the message starts with the bot's name
 	if has "$1" "^laracroft: " ; then
